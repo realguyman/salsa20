@@ -2,6 +2,8 @@
 
 Salsa20 implemented in Rust according to the specification document provided by Daniel J. Bernstein.
 
+**WARNING:** Do not use for systems that require security!
+
 ## License
 
 Copyright (C) 2022 Dale E. Wingard Jr.
