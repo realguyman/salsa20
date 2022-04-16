@@ -29,6 +29,10 @@ fn double_round(mut state: [u32; 16]) -> [u32; 16] {
     row_round(column_round(state))
 }
 
+fn little_endian(bytes: [u8; 4]) -> u32 {
+    u32::from_le_bytes(bytes)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -206,6 +210,30 @@ mod tests {
                 0xca531c29, 0x8e7943db, 0xac1680cd, 0xd503ca00,
                 0xa74b2ad6, 0xbc331c5c, 0x1dda24c7, 0xee928277,
             ]
+        );
+    }
+
+    #[test]
+    fn little_endian_test_1() {
+        assert_eq!(
+            little_endian([0, 0, 0, 0]),
+            0x00000000
+        );
+    }
+
+    #[test]
+    fn little_endian_test_2() {
+        assert_eq!(
+            little_endian([86, 75, 30, 9]),
+            0x091e4b56
+        );
+    }
+
+    #[test]
+    fn little_endian_test_3() {
+        assert_eq!(
+            little_endian([255, 255, 255, 250]),
+            0xfaffffff
         );
     }
 }
